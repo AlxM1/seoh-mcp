@@ -1,0 +1,18 @@
+{
+  "name": "seoh-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for SEOh! — GEO scoring, SEO audits, competitor comparison, keyword analysis, and technical checks",
+  "main": "index.js",
+  "bin": {
+    "seoh-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["mcp", "seo", "geo", "generative-engine-optimization", "website-analysis", "ai-search"],
+  "author": "SEOh! (https://seoh.ca)",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  }
+}
