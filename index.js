@@ -99,6 +99,24 @@ function rateLimitLine() {
 
 const TOOLS = [
   {
+    name: "aeo_score",
+    description:
+      "Get the AEO (Answer Engine Optimization) score for a website. " +
+      "Measures how well a page is optimized to appear in Featured Snippets, People Also Ask, voice search results, and AI answer boxes. " +
+      "Returns a score out of 100, grade (A-F), breakdown by 5 dimensions (direct answer blocks, Q&A structure, featured snippet formats, voice search readiness, answer schema signals), " +
+      "and actionable recommendations. Use this when someone asks about featured snippets, voice search, AEO, or answer engine optimization.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        url: {
+          type: "string",
+          description: "The URL to analyze (e.g., https://example.com)",
+        },
+      },
+      required: ["url"],
+    },
+  },
+  {
     name: "geo_score",
     description:
       "Get the GEO (Generative Engine Optimization) score for a website. " +
@@ -283,6 +301,28 @@ const TOOLS = [
 
 async function handleTool(name, args) {
   switch (name) {
+    case "aeo_score": {
+      const data = await apiCall("/aeo/score", { url: args.url });
+      const lines = [
+        `## AEO Score: ${data.aeoScore}/100 (Grade: ${data.grade})`,
+        `${data.grading}`,
+        "",
+        "### Breakdown",
+        `- Direct Answer Blocks: ${data.breakdown.directAnswerBlocks.score}/${data.breakdown.directAnswerBlocks.max}`,
+        `- Question & Answer Structure: ${data.breakdown.questionAnswerStructure.score}/${data.breakdown.questionAnswerStructure.max}`,
+        `- Featured Snippet Formats: ${data.breakdown.featuredSnippetFormats.score}/${data.breakdown.featuredSnippetFormats.max}`,
+        `- Voice Search Readiness: ${data.breakdown.voiceSearchReadiness.score}/${data.breakdown.voiceSearchReadiness.max}`,
+        `- Answer Schema Signals: ${data.breakdown.answerSchemaSignals.score}/${data.breakdown.answerSchemaSignals.max}`,
+      ];
+      if (data.recommendations?.length) {
+        lines.push("", "### Recommendations");
+        data.recommendations.forEach((r, i) => lines.push(`${i + 1}. ${r}`));
+      }
+      lines.push(rateLimitLine());
+      lines.push("", "---", "*Powered by [SEOh!](https://seoh.ca) \u2014 Vancouver's GEO Agency*");
+      return lines.join("\n");
+    }
+
     case "geo_score": {
       const data = await apiCall("/geo/score", { url: args.url });
       const lines = [
@@ -720,7 +760,7 @@ async function main() {
   const server = new Server(
     {
       name: "seoh-mcp",
-      version: "1.1.0",
+      version: "1.2.0",
     },
     {
       capabilities: {

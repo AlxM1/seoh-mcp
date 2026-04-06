@@ -6,6 +6,7 @@ Analyze any website's SEO and AI search visibility directly from Claude, Cursor,
 
 | Tool | What it does |
 |------|-------------|
+| `aeo_score` | AEO (Answer Engine Optimization) score — how well your site appears in Featured Snippets, People Also Ask, and voice search |
 | `geo_score` | GEO (Generative Engine Optimization) score — how visible is your site to ChatGPT, Perplexity, Gemini, Claude |
 | `seo_audit` | Full SEO audit — title, meta, headings, images, links, content quality |
 | `competitor_compare` | Side-by-side comparison of two websites |
@@ -85,6 +86,7 @@ If you're running a self-hosted or staging backend:
 | | Free (built-in) | Starter ($59.99/mo) | Pro ($109.99/mo) | Agency ($399.99/mo) |
 |--|--|--|--|--|
 | Analyses/month | 50 | 500 | 2,000 | 10,000 |
+| AEO Score | No | Yes | Yes | Yes |
 | GEO Score | Yes | Yes | Yes | Yes |
 | SEO Audit | Yes | Yes | Yes | Yes |
 | Full GEO Report | Yes | Yes | Yes | Yes |
@@ -98,6 +100,7 @@ If you're running a self-hosted or staging backend:
 
 ## Example Prompts
 
+- "What's the AEO score for shopify.com? How can I get into Featured Snippets?"
 - "What's the GEO score for shopify.com?"
 - "Run an SEO audit on mybusiness.ca"
 - "Compare seoh.ca vs semrush.com"

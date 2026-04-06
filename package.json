@@ -1,6 +1,6 @@
 {
   "name": "seoh-mcp",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "MCP server for SEOh! — GEO scoring, SEO audits, competitor comparison, keyword analysis, technical checks, schema validation, SERP preview, site crawling, full GEO reports, and usage tracking",
   "main": "index.js",
   "bin": {
